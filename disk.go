@@ -118,8 +118,10 @@ func FormatDisk(name string, format string, label string) error {
 		return err
 	}
 
-	log.Printf("Setting device label to %s", label)
-	stdout, stderr, err = cmd("e2label", deviceName, label)
+	if label != "" {
+		log.Printf("Setting device label to %s", label)
+		stdout, stderr, err = cmd("e2label", deviceName, label)
+	}
 
 	if err != nil {
 		log.Printf("Label command error: %v %v", stdout, stderr)
